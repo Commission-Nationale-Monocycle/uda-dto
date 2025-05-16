@@ -50,7 +50,7 @@ impl Ord for UdaMember {
         } else if self.first_name() != other.first_name() {
             self.first_name().cmp(other.first_name())
         } else {
-            self.membership_number().cmp(&other.membership_number())
+            self.membership_number().cmp(other.membership_number())
         }
     }
 }
