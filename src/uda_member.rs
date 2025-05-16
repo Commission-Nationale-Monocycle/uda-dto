@@ -54,3 +54,43 @@ impl Ord for UdaMember {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    mod ord {
+        use crate::uda_member::UdaMember;
+
+        #[test]
+        fn equal() {
+            let member_1 = UdaMember::new(1, None, "John".to_string(), "Doe".to_string(), "john.doe@email.com".to_string(), None, true);
+            let member_2 = UdaMember::new(1, None, "John".to_string(), "Doe".to_string(), "john.doe@email.com".to_string(), None, true);
+
+            assert_eq!(member_1, member_2);
+        }
+
+
+        #[test]
+        fn greater_by_last_name() {
+            let member_1 = UdaMember::new(1, None, "John".to_string(), "Doe".to_string(), "john.doe@email.com".to_string(), None, true);
+            let member_2 = UdaMember::new(1, None, "John".to_string(), "Jacques".to_string(), "john.doe@email.com".to_string(), None, true);
+
+            assert!(member_1 < member_2);
+        }
+
+        #[test]
+        fn greater_by_first_name() {
+            let member_1 = UdaMember::new(1, None, "John".to_string(), "Doe".to_string(), "john.doe@email.com".to_string(), None, true);
+            let member_2 = UdaMember::new(1, None, "William".to_string(), "Doe".to_string(), "john.doe@email.com".to_string(), None, true);
+
+            assert!(member_1 < member_2);
+        }
+
+        #[test]
+        fn greater_by_membership_number() {
+            let member_1 = UdaMember::new(1, Some("123456".to_string()), "John".to_string(), "Doe".to_string(), "john.doe@email.com".to_string(), None, true);
+            let member_2 = UdaMember::new(1, Some("789123".to_string()), "John".to_string(), "Doe".to_string(), "john.doe@email.com".to_string(), None, true);
+
+            assert!(member_1 < member_2);
+        }
+    }
+}
